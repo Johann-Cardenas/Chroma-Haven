@@ -35,7 +35,7 @@ illinois_hex = ['2E364F', '2D5D7C', 'F3F0E2', 'EF5939']
 
 # User input
 # ==============================================================================
-colors_hex = illinois_hex
+colors_hex = lima_hex
 # ==============================================================================
 
 # Transforming colors to RGB
@@ -91,6 +91,7 @@ for autotext in autotexts:
 plt.title('Pie Chart', fontweight='bold')
 plt.legend(slices, [f'D{i+1}' for i in range(4)], title="Datasets", loc="upper center", bbox_to_anchor=(0.50, 0.05), ncol=4)
 plt. tight_layout()
+# Comment
 plt.show()
 
 # ______________________________________________________
