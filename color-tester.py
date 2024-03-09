@@ -16,6 +16,43 @@ def hex_rgb(hex_color):
     hex_color = hex_color.lstrip('#')  # Remove '#' if it's there
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
+
+# Function to create line and bar plots for a given color palette
+def create_plots(colors_rgb):
+    # Generate random data for visualization
+    np.random.seed(4)  # For reproducibility
+    data_line = np.random.rand(4, 8)  # Generate 4 datasets
+    data_bar = np.random.rand(4, 4)  # Generate 4 datasets
+    markers = ['o', 'o', 'o', 'o']
+
+    # Line plot with markers
+    for i in range(data_line.shape[0]):
+        plt.plot(data_line[i], marker=markers[i], linestyle='-', color=[c/255. for c in colors_rgb[i]], 
+                 markeredgecolor='black', markeredgewidth=0.5, markersize=5, label=f'D{i+1}')
+    plt.legend(loc='best')
+    plt.title('Line Plot', fontweight=str('bold'))
+    plt.xlabel('X axis', fontweight=str('bold'))
+    plt.ylabel('Y axis', fontweight=str('bold'))
+    plt.grid(True, linestyle='--', linewidth=0.5, color='lightgray')
+    plt.legend(loc='best')
+        
+
+    # Bar chart plot
+    plt.subplot(1, 2, 2)  # 1 row, 2 columns, 2nd subplot
+    bar_width = 0.2
+    index = np.arange(data_bar.shape[1])
+    for i in range(data_bar.shape[0]):
+        plt.bar(index + i*bar_width, data_bar[i], bar_width, color=[c/255. for c in colors_rgb[i]], 
+                label=f'D{i+1}', edgecolor='black', linewidth=0.5)
+    plt.xticks(index + bar_width, index)
+    plt.title('Bar Chart', fontweight=str('bold'))
+    plt.xlabel('X axis', fontweight=str('bold'))
+    plt.ylabel('Y axis', fontweight=str('bold'))
+    #plt.yaxis.grid(True, linestyle='--', linewidth=0.25, color='lightgray')
+    plt.legend(loc='best')
+
+
+
 # Define color palettes (black and white)
 monochroma_hex = ['9CA1B3', 'CFD1FA', 'EBECEF', '58586F']
 monostyle_hex = ['444251', '8D89A3', 'E4E3E5', 'CBCBCF']
@@ -38,60 +75,84 @@ illinois_hex = ['2E364F', '2D5D7C', 'F3F0E2', 'EF5939']
 colors_hex = lima_hex
 # ==============================================================================
 
-# Transforming colors to RGB
-colors_rgb = [hex_rgb(color) for color in colors_hex]
+# Define all color palettes in a list
+color_palettes = [lima_hex, redblue_hex, tokyo_hex, berlin_hex, santiago_hex, rio_hex, bogota_hex, illinois_hex]
 
-# ______________________________________________________
-# Visualizations
+# Prepare the figure to contain subplots for each palette
+num_palettes = len(color_palettes)
+fig, axs = plt.subplots(num_palettes, 2, figsize=(8, 3*num_palettes), dpi=300)
 
-# Generate random data for visualization
-np.random.seed(4)  # For reproducibility
-data_line = np.random.rand(4, 8)  # Generate 4 datasets
-data_bar = np.random.rand(4, 4)  # Generate 4 datasets
-markers = ['o', 'o', 'o', 'o']
+for idx, colors_hex in enumerate(color_palettes):
+    plt.subplot(num_palettes, 2, 2*idx + 1)  # Positioning the line plot
+    if idx == 0:
+        plt.title('Line Plot')
+    colors_rgb = [hex_rgb(color) for color in colors_hex]
+    create_plots(colors_rgb)
 
-# Create line plot with markers
-plt.figure(figsize=(4, 3), dpi=300)
-for i in range(data_line.shape[0]):
-    plt.plot(data_line[i], marker=markers[i], linestyle='-', color=[c/255. for c in colors_rgb[i]], 
-             markeredgecolor='black', markeredgewidth=0.5, markersize=5, label=f'D{i+1}', )
-plt.title('Line Plot', fontweight=str('bold'))
-plt.xlabel('X axis', fontweight=str('bold'))
-plt.ylabel('Y axis', fontweight=str('bold'))
-plt.grid(True, linestyle='--', linewidth=0.5, color='lightgray')
-plt.legend(loc='best')
+    plt.subplot(num_palettes, 2, 2*idx + 2)  # Positioning the bar chart
+    if idx == 0:
+        plt.title('Bar Chart')
+    # Note: The actual plotting is handled within the create_plots function
+
+plt.tight_layout()
 plt.show()
 
-# Create bar chart plot with markers
-fig, ax = plt.subplots(figsize=(4, 3), dpi=300)
-bar_width = 0.2
-index = np.arange(data_bar.shape[1])
-for i in range(data_bar.shape[0]):
-    ax.bar(index + i*bar_width, data_bar[i], bar_width, color=[c/255. for c in colors_rgb[i]], 
-           label=f'D{i+1}', edgecolor='black', linewidth=0.5)
-plt.title('Bar Chart', fontweight=str('bold'))
-plt.xlabel('X axis', fontweight=str('bold'))
-plt.ylabel('Y axis', fontweight=str('bold'))
-plt.xticks(index + bar_width, index)
-ax.yaxis.grid(True, linestyle='--', linewidth=0.25, color='lightgray')
-plt.legend(loc='best')
-plt.show()
 
-# Create pie chart
-plt.figure(figsize=(4, 3), dpi=300)
-normalized_colors = [(r/255., g/255., b/255.) for (r, g, b) in colors_rgb]
-slices, texts, autotexts = plt.pie([1, 2, 3, 4], colors=normalized_colors, 
-                                   autopct='%1.1f%%', startangle=140, 
-                                   wedgeprops={'edgecolor': 'black', 'linewidth': 0.5})
 
-for autotext in autotexts:
-    autotext.set_color('black')  # Change color to make percentage labels more visible if needed
-    autotext.set_bbox(dict(facecolor='white', alpha=0.6, edgecolor='none', boxstyle='round,pad=0.2'))
+# # Transforming colors to RGB
+# colors_rgb = [hex_rgb(color) for color in colors_hex]
+
+# # ______________________________________________________
+# # Visualizations
+
+# # Generate random data for visualization
+# np.random.seed(4)  # For reproducibility
+# data_line = np.random.rand(4, 8)  # Generate 4 datasets
+# data_bar = np.random.rand(4, 4)  # Generate 4 datasets
+# markers = ['o', 'o', 'o', 'o']
+
+# # Create line plot with markers
+# plt.figure(figsize=(4, 3), dpi=300)
+# for i in range(data_line.shape[0]):
+#     plt.plot(data_line[i], marker=markers[i], linestyle='-', color=[c/255. for c in colors_rgb[i]], 
+#              markeredgecolor='black', markeredgewidth=0.5, markersize=5, label=f'D{i+1}', )
+# plt.title('Line Plot', fontweight=str('bold'))
+# plt.xlabel('X axis', fontweight=str('bold'))
+# plt.ylabel('Y axis', fontweight=str('bold'))
+# plt.grid(True, linestyle='--', linewidth=0.5, color='lightgray')
+# plt.legend(loc='best')
+# plt.show()
+
+# # Create bar chart plot with markers
+# fig, ax = plt.subplots(figsize=(4, 3), dpi=300)
+# bar_width = 0.2
+# index = np.arange(data_bar.shape[1])
+# for i in range(data_bar.shape[0]):
+#     ax.bar(index + i*bar_width, data_bar[i], bar_width, color=[c/255. for c in colors_rgb[i]], 
+#            label=f'D{i+1}', edgecolor='black', linewidth=0.5)
+# plt.title('Bar Chart', fontweight=str('bold'))
+# plt.xlabel('X axis', fontweight=str('bold'))
+# plt.ylabel('Y axis', fontweight=str('bold'))
+# plt.xticks(index + bar_width, index)
+# ax.yaxis.grid(True, linestyle='--', linewidth=0.25, color='lightgray')
+# plt.legend(loc='best')
+# plt.show()
+
+# # Create pie chart
+# plt.figure(figsize=(4, 3), dpi=300)
+# normalized_colors = [(r/255., g/255., b/255.) for (r, g, b) in colors_rgb]
+# slices, texts, autotexts = plt.pie([1, 2, 3, 4], colors=normalized_colors, 
+#                                    autopct='%1.1f%%', startangle=140, 
+#                                    wedgeprops={'edgecolor': 'black', 'linewidth': 0.5})
+
+# for autotext in autotexts:
+#     autotext.set_color('black')  # Change color to make percentage labels more visible if needed
+#     autotext.set_bbox(dict(facecolor='white', alpha=0.6, edgecolor='none', boxstyle='round,pad=0.2'))
     
-plt.title('Pie Chart', fontweight='bold')
-plt.legend(slices, [f'D{i+1}' for i in range(4)], title="Datasets", loc="upper center", bbox_to_anchor=(0.50, 0.05), ncol=4)
-plt. tight_layout()
-# Comment
-plt.show()
+# plt.title('Pie Chart', fontweight='bold')
+# plt.legend(slices, [f'D{i+1}' for i in range(4)], title="Datasets", loc="upper center", bbox_to_anchor=(0.50, 0.05), ncol=4)
+# plt. tight_layout()
+# # Comment
+# plt.show()
 
 # ______________________________________________________
