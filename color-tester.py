@@ -57,16 +57,30 @@ monochroma_hex = ['9CA1B3', 'CFD1FA', 'EBECEF', '58586F']
 monostyle_hex = ['444251', '8D89A3', 'E4E3E5', 'CBCBCF']
 monolight_hex = ['BEBCCB', 'F1EFF2', 'DDD7DC', 'A994A7']
 monodark_hex = ['56514B', 'E7E5DD', 'BDBBAD', '999990']
+panama_hex = ['4D4957', 'F4F4F4', 'E7E6E6', '9F9DA3']
+managua_hex = ['2B2B2B', '898989', 'F8F8F8', 'E8E8E8']
+sanjose_hex = ['6F727F', 'EEEDED', 'AAA6B5', '866B7A']
+asuncion_hex = ['5E5D5D', 'A7A5A5', 'EAE6E4', 'A4918E']
 lima_hex = ['575965', 'C3C4C8', 'F8F8F6', '939498']
 
 # Define color palettes (colorful)
 stockholm_hex = ['F01159', 'DFF8FE', '82CDE5', '003458']
-tokyo_hex = ['2C3D63', 'ADDCCA', 'F7F8F3', 'FF6F5E']
+helsinki_hex = ['F7444E', 'F7F8F3', '78BCC4', '002C3E']
+brusels_hex = ['043353', 'E44652', 'FAF8F0', 'E4DFCF']
 berlin_hex = ['252324', 'FA3283', 'EAF7DF', '72EFD9']
+alienware = ['2C393F', '00C7C7', 'EDEDED', 'FFFFFF']
 santiago_hex = ['2F404F', '3894A1', 'F0F1EE', 'C7DAD3']
+sidney_hex = ['10455B', '2AA1AF', 'E2F0F1', 'FFFFFF']
+buenosaires_hext = ['1F355D', 'FFFFFF', 'C0ECEC', '6FBEDB']
+quito_hex = ['353755', 'FFFFFF', 'E0E4EE', '5BD3C7']
+montevideo_hex = ['287094', 'D4D4CE', 'F6F6F6', '023246']
 rio_hex = ['2C2627', 'BC2C3D', 'F8F3E6', 'EFD2BC']
 bogota_hex = ['062639', 'E7301C', 'EDF4EA', 'C9D4C5']
+tokyo_hex = ['2C3D63', 'ADDCCA', 'F7F8F3', 'FF6F5E']
 illinois_hex = ['2E364F', '2D5D7C', 'F3F0E2', 'EF5939']
+barcelona_hex = ['3B4069', 'ECE0D5', 'F9F3EB', 'FF593E']
+lisbon_hex = ['FF642E', 'F5F0E5', 'D4D7DB', '444C5E']
+caracas_hex = ['25424C', 'FFA45B', 'FFEBDB', 'FB770D']
 
 # User input
 # ==============================================================================
@@ -99,7 +113,7 @@ palette_names = ['Monochroma',
 # ==============================================================================
 
 # Prepare the figure to contain subplots for each palette
-num_palettes = len(color_palettes)
+num_palettes = len(palettes_hex)
 fig, axs = plt.subplots(num_palettes, 2, figsize=(8, 3*num_palettes), dpi=300)
 
 for idx, (palette_name, colors_hex) in enumerate(zip(palette_names, palettes_hex)):
