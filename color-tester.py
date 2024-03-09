@@ -18,7 +18,7 @@ def hex_rgb(hex_color):
 
 
 # Function to create line and bar plots for a given color palette
-def create_plots(colors_rg, ax1, ax2):
+def create_plots(colors_rg, ax1, ax2, palette_name):
     # Generate random data for visualization
     np.random.seed(4)  # For reproducibility
     data_line = np.random.rand(4, 8)  # Generate 4 datasets
@@ -29,7 +29,7 @@ def create_plots(colors_rg, ax1, ax2):
     for i in range(data_line.shape[0]):
         ax1.plot(data_line[i], marker=markers[i], linestyle='-', color=[c/255. for c in colors_rgb[i]], 
                  markeredgecolor='black', markeredgewidth=0.5, markersize=5, label=f'D{i+1}')
-    ax1.set_title('Line Plot', fontweight='bold')
+    ax1.set_title(f'{palette_name} - Line Plot', fontweight='bold')
     ax1.set_xlabel('X axis', fontweight='bold')
     ax1.set_ylabel('Y axis', fontweight='bold')
     ax1.grid(True, linestyle='--', linewidth=0.5, color='lightgray')
@@ -44,7 +44,7 @@ def create_plots(colors_rg, ax1, ax2):
                 label=f'D{i+1}', edgecolor='black', linewidth=0.5)
     ax2.set_xticks(index + bar_width / 2)
     ax2.set_xticklabels(index)
-    ax2.set_title('Bar Chart', fontweight='bold')
+    ax2.set_title(f'{palette_name} - Bar Chart', fontweight='bold')
     ax2.set_xlabel('X axis', fontweight='bold')
     ax2.set_ylabel('Y axis', fontweight='bold')
     ax2.legend(loc='best')
@@ -60,7 +60,7 @@ monodark_hex = ['56514B', 'E7E5DD', 'BDBBAD', '999990']
 lima_hex = ['575965', 'C3C4C8', 'F8F8F6', '939498']
 
 # Define color palettes (colorful)
-redblue_hex = ['F01159', 'DFF8FE', '82CDE5', '003458']
+stockholm_hex = ['F01159', 'DFF8FE', '82CDE5', '003458']
 tokyo_hex = ['2C3D63', 'ADDCCA', 'F7F8F3', 'FF6F5E']
 berlin_hex = ['252324', 'FA3283', 'EAF7DF', '72EFD9']
 santiago_hex = ['2F404F', '3894A1', 'F0F1EE', 'C7DAD3']
@@ -71,28 +71,44 @@ illinois_hex = ['2E364F', '2D5D7C', 'F3F0E2', 'EF5939']
 # User input
 # ==============================================================================
 # Define all color palettes in a list
-color_palettes = [lima_hex, 
-                  redblue_hex, 
-                  tokyo_hex, 
-                  berlin_hex, 
-                  santiago_hex, 
-                  rio_hex, 
-                  bogota_hex, 
-                  illinois_hex]
+palettes_hex =  [monochroma_hex,
+                 monostyle_hex,
+                 monolight_hex,
+                 monodark_hex,
+                 lima_hex, 
+                 stockholm_hex, 
+                 tokyo_hex, 
+                 berlin_hex, 
+                 santiago_hex, 
+                 rio_hex, 
+                 bogota_hex, 
+                 illinois_hex]
+
+palette_names = ['Monochroma',
+                 'Monostyle',
+                 'Monolight',
+                 'Monodark',
+                 'Lima', 
+                 'Stockholm', 
+                 'Tokyo', 
+                 'Berlin', 
+                 'Santiago', 
+                 'Rio', 
+                 'Bogota', 
+                 'Illinois']
 # ==============================================================================
 
 # Prepare the figure to contain subplots for each palette
 num_palettes = len(color_palettes)
 fig, axs = plt.subplots(num_palettes, 2, figsize=(8, 3*num_palettes), dpi=300)
 
-for idx, colors_hex in enumerate(color_palettes):
+for idx, (palette_name, colors_hex) in enumerate(zip(palette_names, palettes_hex)):
     colors_rgb = [hex_rgb(color) for color in colors_hex]
     # Call the function with specific axes
-    create_plots(colors_rgb, axs[idx, 0], axs[idx, 1])
+    create_plots(colors_rgb, axs[idx, 0], axs[idx, 1], palette_name)
 
 plt.tight_layout()
 plt.show()
-
 
 
 # # Create pie chart
