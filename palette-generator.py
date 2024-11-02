@@ -1,3 +1,18 @@
+# ╔══════════════════════════════════════════════════════════════════════════════════╗
+# ║███████╗███╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗ █████╗ ████████╗ ██████╗ ██████╗ ║
+# ║██╔════╝████╗  ██║██╔════╝ ██║████╗  ██║██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗║
+# ║█████╗  ██╔██╗ ██║██║  ███╗██║██╔██╗ ██║█████╗  ███████║   ██║   ██║   ██║██████╔╝║
+# ║██╔══╝  ██║╚██╗██║██║   ██║██║██║╚██╗██║██╔══╝  ██╔══██║   ██║   ██║   ██║██╔══██╗║
+# ║███████╗██║ ╚████║╚██████╔╝██║██║ ╚████║███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║║
+# ║╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝║
+# ╚══════════════════════════════════════════════════════════════════════════════════╝
+# ╔══════════════════════════════════════════════════════════════════════════════════╗
+#   Repository:  Chroma Haven                                                                                               
+#   Description: Create a color palette to match an existing image.                                                           #
+#   Author: Johann J Cardenas                                                   
+#   Date: 11/01/2024        Version: v2.0.0                                              
+# ╚══════════════════════════════════════════════════════════════════════════════════╝
+
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -20,7 +35,6 @@ def sort_palette(palette, counts):
     sorted_palette = [palette_list[i] for i in sorted_indices]
     sorted_counts = [counts[i] for i in sorted_indices]
     return sorted_palette, sorted_counts
-
 
 image = Image.open(Path+filename)
 image = image.convert('RGB').resize((150, 150))
@@ -54,7 +68,6 @@ plt.title('Color Frequency')
 plt.xlabel('Colors')
 plt.ylabel('Frequency')
 plt.xticks([])
-
 plt.tight_layout()
 plt.show()
 
