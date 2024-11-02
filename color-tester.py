@@ -8,9 +8,9 @@
 # ╚══════════════════════════════════════════════════════════════════════════════════╝
 # ╔══════════════════════════════════════════════════════════════════════════════════╗
 #   Repository:  Chroma Haven                                                                                               
-#   Description: This script performs [briefly describe the purpose of the code.                                                             #
+#   Description: Test graphically color palettes and choose your fighter.                                                             #
 #   Author: Johann J Cardenas                                                   
-#   Date: [Date]          Version: [Version Number]                                                 
+#   Date: 11/01/2024        Version: v2.0.0                                              
 # ╚══════════════════════════════════════════════════════════════════════════════════╝
 
 import matplotlib.pyplot as plt
@@ -71,6 +71,7 @@ stockholm_hex = ['F01159', 'DFF8FE', '82CDE5', '003458']
 helsinki_hex = ['F7444E', 'F7F8F3', '78BCC4', '002C3E']
 brusels_hex = ['043353', 'E44652', 'FAF8F0', 'E4DFCF']
 berlin_hex = ['252324', 'FA3283', 'EAF7DF', '72EFD9']
+cabo_hex = ['252324', 'FF2C82', 'EAF7DF', '72EFD9']
 alienware = ['2C393F', '00C7C7', 'EDEDED', 'FFFFFF']
 santiago_hex = ['2F404F', '3894A1', 'F0F1EE', 'C7DAD3']
 sidney_hex = ['10455B', '2AA1AF', 'E2F0F1', 'FFFFFF']
@@ -89,72 +90,45 @@ caracas_hex = ['25424C', 'FFA45B', 'FFEBDB', 'FB770D']
 # User input
 # ==============================================================================
 # Define all color palettes in a list
-palettes_hex =  [monochroma_hex,
-                 monostyle_hex,
-                 monolight_hex,
-                 monodark_hex,
-                 mumbay_hex,
-                 panama_hex,
-                 managua_hex,
-                 cairo_hex,
-                 sanjose_hex,
-                 asuncion_hex,
-                 lima_hex, 
-                 stockholm_hex, 
-                 helsinki_hex,
-                 brusels_hex,
-                 berlin_hex,
-                 alienware,
-                 santiago_hex, 
-                 sidney_hex,
-                 buenosaires_hex,
-                 quito_hex,
-                 montevideo_hex,
-                 rio_hex, 
-                 bogota_hex, 
-                 tokyo_hex,
-                 illinois_hex,
-                 galicia_hex,
-                 barcelona_hex,
-                 lisbon_hex,
-                 caracas_hex]
-
-palette_names = ['Monochroma',
-                 'Monostyle',
-                 'Monolight',
-                 'Monodark',
-                 'Mumbay',
-                 'Panama City',
-                 'Managua',
-                 'Cairo',
-                 'San Jose',
-                 'Asuncion',
-                 'Lima', 
-                 'Stockholm', 
-                 'Helsinki',
-                 'Brusels', 
-                 'Berlin',
-                 'Alienware',
-                 'Santiago', 
-                 'Sidney',
-                 'Buenos Aires',
-                 'Quito',
-                 'Montevideo',
-                 'Rio', 
-                 'Bogota', 
-                 'Tokyo',
-                 'Illinois',
-                 'Galicia',
-                 'Barcelona',
-                 'Lisbon',
-                 'Caracas']
-# ==============================================================================
+palettes = {
+    'Monochroma': monochroma_hex,
+    'Monostyle': monostyle_hex,
+    'Monolight': monolight_hex,
+    'Monodark': monodark_hex,
+    'Mumbay': mumbay_hex,
+    'Panama City': panama_hex,
+    'Managua': managua_hex,
+    'Cairo': cairo_hex,
+    'San Jose': sanjose_hex,
+    'Asuncion': asuncion_hex,
+    'Lima': lima_hex,
+    'Stockholm': stockholm_hex,
+    'Helsinki': helsinki_hex,
+    'Brusels': brusels_hex,
+    'Berlin': berlin_hex,
+    'Punta Los Cabos': cabo_hex,
+    'Alienware': alienware,
+    'Santiago': santiago_hex,
+    'Sidney': sidney_hex,
+    'Buenos Aires': buenosaires_hex,
+    'Quito': quito_hex,
+    'Montevideo': montevideo_hex,
+    'Rio': rio_hex,
+    'Bogota': bogota_hex,
+    'Tokyo': tokyo_hex,
+    'Illinois': illinois_hex,
+    'Galicia': galicia_hex,
+    'Barcelona': barcelona_hex,
+    'Lisbon': lisbon_hex,
+    'Caracas': caracas_hex
+}
 
 # Prepare the figure to contain subplots for each palette
-num_palettes = len(palettes_hex)
+num_palettes = len(palettes)
 fig, axs = plt.subplots(num_palettes, 2, figsize=(8, 3*num_palettes), dpi=300)
 
-for idx, (palette_name, colors_hex) in enumerate(zip(palette_names, palettes_hex)):
+# Iterate over the dictionary to plot each palette
+for idx, (palette_name, colors_hex) in enumerate(palettes.items()):
     colors_rgb = [hex_rgb(color) for color in colors_hex]
     # Call the function with specific axes
     create_plots(colors_rgb, axs[idx, 0], axs[idx, 1], palette_name)
