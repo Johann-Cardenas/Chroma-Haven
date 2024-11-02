@@ -21,7 +21,7 @@ As of January 2024, the repository is organized as follows:
 ### Scientific Visualization
 These scripts contain visual representation of predefined color palettes.
 
-- [ ] **color-tester.py:**🐾 Pre-visualizae palettes in line and bar plots.
+- [ ] **color-tester.py:** Pre-visualizae palettes in line and bar plots.
 
 
 > [!TIP]
