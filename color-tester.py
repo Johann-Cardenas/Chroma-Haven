@@ -1,21 +1,25 @@
+# ╔══════════════════════════════════════════════════════════════════════════════════╗
+# ║███████╗███╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗ █████╗ ████████╗ ██████╗ ██████╗ ║
+# ║██╔════╝████╗  ██║██╔════╝ ██║████╗  ██║██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗║
+# ║█████╗  ██╔██╗ ██║██║  ███╗██║██╔██╗ ██║█████╗  ███████║   ██║   ██║   ██║██████╔╝║
+# ║██╔══╝  ██║╚██╗██║██║   ██║██║██║╚██╗██║██╔══╝  ██╔══██║   ██║   ██║   ██║██╔══██╗║
+# ║███████╗██║ ╚████║╚██████╔╝██║██║ ╚████║███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║║
+# ║╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝║
+# ╚══════════════════════════════════════════════════════════════════════════════════╝
+# ╔══════════════════════════════════════════════════════════════════════════════════╗
+#   Repository:  Chroma Haven                                                                                               
+#   Description: This script performs [briefly describe the purpose of the code.                                                             #
+#   Author: Johann J Cardenas                                                   
+#   Date: [Date]          Version: [Version Number]                                                 
+# ╚══════════════════════════════════════════════════════════════════════════════════╝
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 # Define function to convert hex color to RGB
 def hex_rgb(hex_color):
-    """
-    Convert a hex color string to an RGB tuple.
-
-    Parameters:
-    - hex_color: A string representing a hex color, e.g., '9CA1B3'
-
-    Returns:
-    - A tuple of integers representing the RGB values, e.g., (156, 161, 179)
-    """
     hex_color = hex_color.lstrip('#')  # Remove '#' if it's there
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
-
 
 # Function to create line and bar plots for a given color palette
 def create_plots(colors_rg, ax1, ax2, palette_name):
@@ -35,7 +39,6 @@ def create_plots(colors_rg, ax1, ax2, palette_name):
     ax1.grid(True, linestyle='--', linewidth=0.5, color='lightgray')
     ax1.legend(loc='best')
         
-
     # Bar chart plot
     bar_width = 0.2
     index = np.arange(data_bar.shape[1])
@@ -49,8 +52,6 @@ def create_plots(colors_rg, ax1, ax2, palette_name):
     ax2.set_ylabel('Y axis', fontweight='bold')
     ax2.legend(loc='best')
     ax2.grid(True, axis='y', linestyle='--', linewidth=0.5, color='lightgray')
-
-
 
 # Define color palettes (black and white)
 monochroma_hex = ['9CA1B3', 'CFD1FA', 'EBECEF', '58586F']
@@ -160,23 +161,3 @@ for idx, (palette_name, colors_hex) in enumerate(zip(palette_names, palettes_hex
 
 plt.tight_layout()
 plt.show()
-
-
-# # Create pie chart
-# plt.figure(figsize=(4, 3), dpi=300)
-# normalized_colors = [(r/255., g/255., b/255.) for (r, g, b) in colors_rgb]
-# slices, texts, autotexts = plt.pie([1, 2, 3, 4], colors=normalized_colors, 
-#                                    autopct='%1.1f%%', startangle=140, 
-#                                    wedgeprops={'edgecolor': 'black', 'linewidth': 0.5})
-
-# for autotext in autotexts:
-#     autotext.set_color('black')  # Change color to make percentage labels more visible if needed
-#     autotext.set_bbox(dict(facecolor='white', alpha=0.6, edgecolor='none', boxstyle='round,pad=0.2'))
-    
-# plt.title('Pie Chart', fontweight='bold')
-# plt.legend(slices, [f'D{i+1}' for i in range(4)], title="Datasets", loc="upper center", bbox_to_anchor=(0.50, 0.05), ncol=4)
-# plt. tight_layout()
-# # Comment
-# plt.show()
-
-# ______________________________________________________
